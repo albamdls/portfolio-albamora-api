@@ -1,9 +1,11 @@
 from functools import lru_cache
+import os
 import re
 
 from app.services.kb_loader import load_kb_documents
 
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+ENABLE_VECTOR_RETRIEVAL = os.getenv("ENABLE_VECTOR_RETRIEVAL", "").lower() in {"1", "true", "yes"}
 
 SECTION_HINTS: dict[str, tuple[str, ...]] = {
     "about": ("about", "background", "profile", "summary", "sobre", "perfil", "resumen"),
@@ -127,6 +129,9 @@ def _hybrid_search(query: str, k: int = 6):
     normalized_query = normalize_query(query)
     lexical_docs = _lexical_search(normalized_query, k=max(k * 2, 8))
 
+    if not ENABLE_VECTOR_RETRIEVAL:
+        return lexical_docs[:k]
+
     try:
         vector_docs = get_vectorstore().similarity_search(query, k=max(k, 4))
     except Exception:
@@ -148,4 +153,3 @@ def _hybrid_search(query: str, k: int = 6):
 
 def retrieve_context(query: str, k: int = 6):
     return _hybrid_search(query, k=k)
-

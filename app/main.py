@@ -28,5 +28,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.get("/")
+async def root():
+    return {"status": "ok", "service": APP_NAME}
+
+
 app.include_router(health_router, prefix="/api")
 app.include_router(chat_router, prefix="/api")

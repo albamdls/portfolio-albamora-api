@@ -8,10 +8,10 @@ from app.services.retriever import retrieve_context
 def generate_chat_response(payload: ChatRequest) -> ChatResponse:
     turns = get_recent_turns(payload.session_id)
     query = classify_query(payload.message, turns)
-    docs = retrieve_context(query["resolved_message"], k=6)
-
+    docs = []
     answer = deterministic_answer(query, turns)
     if answer is None:
+        docs = retrieve_context(query["resolved_message"], k=6)
         answer = llm_answer(query, docs, turns)
     if answer is None:
         answer = fallback_open_answer(query, docs)
