@@ -70,6 +70,46 @@
         }
     },
     {
+        "id": "languages-1",
+        "section": "about",
+        "type": "languages_profile",
+        "title": "Languages spoken",
+        "subtitle": "Spanish and English",
+        "date_range": "",
+        "skills": [
+            "Spanish",
+            "English"
+        ],
+        "summary": {
+            "es": "Alba habla español nativo e inglés con un nivel intermedio, tanto escrito como hablado.",
+            "en": "Alba speaks native Spanish and intermediate English, both written and spoken."
+        },
+        "highlights": {
+            "es": [
+                "Español nativo.",
+                "Inglés con nivel intermedio, tanto escrito como hablado."
+            ],
+            "en": [
+                "Native Spanish.",
+                "Intermediate English, both written and spoken."
+            ]
+        },
+        "keywords": [
+            "languages",
+            "spoken languages",
+            "language skills",
+            "idiomas",
+            "idiomas que habla alba",
+            "qué idiomas habla alba",
+            "que idiomas habla alba",
+            "english",
+            "spanish",
+            "inglés",
+            "español"
+        ],
+        "content": "Alba speaks native Spanish and intermediate English, both written and spoken."
+    },
+    {
         "id": "experience-1",
         "section": "experience",
         "type": "current_role",
@@ -208,7 +248,7 @@
         "id": "education-2",
         "section": "education",
         "type": "education_record",
-        "title": "Higher Technician in Web and Multimedia Management",
+        "title": "Higher Technician in Web Application Development",
         "subtitle": "IES Virgen de la Paz",
         "date_range": "Sep 2023 - Jun 2025",
         "current": false,
@@ -220,26 +260,27 @@
             "English"
         ],
         "summary": {
-            "es": "Alba completó un Higher Technician in Web and Multimedia Management en IES Virgen de la Paz, centrado en desarrollo web y contenidos digitales.",
-            "en": "Alba completed a Higher Technician in Web and Multimedia Management at IES Virgen de la Paz, focused on web development and digital content."
+            "es": "Alba completó un Higher Technician in Web Application Development en IES Virgen de la Paz, centrado en desarrollo web y aplicaciones web.",
+            "en": "Alba completed a Higher Technician in Web Application Development at IES Virgen de la Paz, focused on web development and web applications."
         },
         "highlights": {
             "es": [
                 "Trabajó con HTML, CSS y JavaScript.",
-                "Desarrolló y mantuvo sitios web y proyectos digitales."
+                "Desarrolló y mantuvo sitios web y aplicaciones web."
             ],
             "en": [
                 "She worked with HTML, CSS, and JavaScript.",
-                "She developed websites and digital projects."
+                "She developed and maintained websites and web applications."
             ]
         },
         "keywords": [
             "web education",
             "formación web",
             "desarrollo web",
-            "multimedia"
+            "desarrollo de aplicaciones web",
+            "web application development"
         ],
-        "content": "Alba Mora de la Sen completed a Higher Technician in Web and Multimedia Management at IES Virgen de la Paz from Sep 2023 to Jun 2025."
+        "content": "Alba Mora de la Sen completed a Higher Technician in Web Application Development at IES Virgen de la Paz from Sep 2023 to Jun 2025."
     },
     {
         "id": "education-3",
@@ -367,50 +408,126 @@
         "id": "project-1",
         "section": "projects",
         "type": "project",
+        "title": "DocuMind AI",
+        "subtitle": "AI / RAG / Document Intelligence / API",
+        "date_range": "",
+        "skills": [
+            "Python",
+            "FastAPI",
+            "LangChain",
+            "OpenAI API",
+            "Embeddings",
+            "ChromaDB",
+            "FAISS",
+            "React",
+            "TypeScript",
+            "Docker",
+            "AWS",
+            "Render",
+            "REST API"
+        ],
+        "summary": {
+            "es": "Aplicación de inteligencia artificial para analizar documentos, extraer información relevante y permitir consultas en lenguaje natural mediante una experiencia tipo chat.",
+            "en": "AI application for analyzing documents, extracting relevant information, and enabling natural-language questions through a chat-style experience."
+        },
+        "highlights": {
+            "es": [
+                "Permite subir documentos como PDFs o textos y hacer preguntas sobre su contenido.",
+                "Utiliza una arquitectura RAG para combinar búsqueda semántica con modelos de lenguaje.",
+                "Incluye indexación eficiente para consultas rápidas y respuestas contextualizadas.",
+                "Combina backend en FastAPI con frontend en React y TypeScript."
+            ],
+            "en": [
+                "It lets users upload documents such as PDFs or text files and ask questions about their content.",
+                "It uses a RAG architecture to combine semantic retrieval with language models.",
+                "It includes efficient indexing for fast queries and contextualized answers.",
+                "It combines a FastAPI backend with a React and TypeScript frontend."
+            ]
+        },
+        "keywords": [
+            "documind ai",
+            "rag project",
+            "langchain project",
+            "document ai",
+            "document intelligence",
+            "semantic search",
+            "chat with documents",
+            "fastapi",
+            "openai api",
+            "embeddings",
+            "vector database",
+            "chroma",
+            "faiss",
+            "proyecto rag",
+            "asistente de documentos",
+            "ia documental"
+        ],
+        "content": "Alba Mora de la Sen is currently developing DocuMind AI, an AI application that uses RAG, semantic search, embeddings, and language models to let users upload documents and chat with their content.",
+        "tags": [
+            "AI",
+            "RAG",
+            "Document Intelligence",
+            "API"
+        ],
+        "github_url": "",
+        "live_url": ""
+    },
+    {
+        "id": "project-2",
+        "section": "projects",
+        "type": "project",
         "title": "Personal Portfolio Website",
-        "subtitle": "Web Development / React / Tailwind CSS / UI/UX",
+        "subtitle": "Web Development / React / AI Chat / UI/UX",
         "date_range": "",
         "skills": [
             "React",
             "TypeScript",
             "Tailwind CSS",
             "Vite",
-            "React Router"
+            "FastAPI",
+            "AI Chat API",
+            "REST API"
         ],
         "summary": {
-            "es": "Portfolio responsive desarrollado con React, TypeScript y Tailwind CSS para presentar el perfil, la experiencia y los proyectos de Alba.",
-            "en": "Responsive portfolio website built with React, TypeScript, and Tailwind CSS to present Alba's profile, experience, and projects."
+            "es": "Portfolio responsive desarrollado con React y Tailwind que ahora incluye un chat con IA y una API en FastAPI para responder preguntas sobre Alba usando datos estructurados del portfolio.",
+            "en": "Responsive portfolio website built with React and Tailwind that now includes an AI chat and a FastAPI API for answering questions about Alba using structured portfolio data."
         },
         "highlights": {
             "es": [
                 "Incluye secciones animadas y componentes interactivos.",
-                "Tiene un enfoque claro en UI/UX."
+                "Integra un widget de chat con IA conectado a una API propia.",
+                "La API usa datos estructurados del portfolio para responder de forma contextualizada."
             ],
             "en": [
                 "It includes animated sections and interactive components.",
-                "It has a clear UI/UX focus."
+                "It integrates an AI chat widget connected to its own API.",
+                "The API uses structured portfolio data to answer questions contextually."
             ]
         },
         "keywords": [
             "portfolio project",
             "react portfolio",
+            "ai chat portfolio",
+            "fastapi api",
             "sitio web portfolio",
+            "chat con ia",
+            "api fastapi",
             "react",
             "tailwind",
             "ui/ux"
         ],
-        "content": "Alba Mora de la Sen built a Personal Portfolio Website, a responsive portfolio website created with React and Tailwind CSS.",
+        "content": "Alba Mora de la Sen built a Personal Portfolio Website, a responsive portfolio website created with React and Tailwind CSS that now includes an AI chat widget and a FastAPI backend API.",
         "tags": [
             "Web Development",
             "React",
-            "Tailwind CSS",
+            "AI",
             "UI/UX"
         ],
         "github_url": "https://github.com/albamdls/portfolio-albamora",
         "live_url": "https://albamdls.github.io/portfolio-albamora/"
     },
     {
-        "id": "project-2",
+        "id": "project-3",
         "section": "projects",
         "type": "project",
         "title": "AWS Quiz Tracker",
@@ -454,284 +571,6 @@
         ],
         "github_url": "https://github.com/albamdls/aws-quiz-tracker",
         "live_url": "https://albamdls.github.io/aws-quiz-tracker/"
-    },
-    {
-        "id": "project-3",
-        "section": "projects",
-        "type": "project",
-        "title": "TurnoMaster",
-        "subtitle": "Fullstack / Backend / Web App / Docker",
-        "date_range": "",
-        "skills": [
-            "Spring Boot",
-            "Java",
-            "Angular",
-            "TypeScript",
-            "MySQL",
-            "Docker"
-        ],
-        "summary": {
-            "es": "Aplicación fullstack de gestión de turnos con acceso por roles, backend y frontend separados, y despliegue con Docker.",
-            "en": "Fullstack shift-management application with role-based access, separate backend and frontend, and Docker deployment."
-        },
-        "highlights": {
-            "es": [
-                "Combina Java con Spring Boot, Angular y MySQL.",
-                "Se desplegó usando Docker."
-            ],
-            "en": [
-                "It combines Java with Spring Boot, Angular, and MySQL.",
-                "It was deployed using Docker."
-            ]
-        },
-        "keywords": [
-            "docker project",
-            "fullstack project",
-            "shift management",
-            "proyecto docker",
-            "gestión de turnos",
-            "angular",
-            "spring boot"
-        ],
-        "content": "Alba Mora de la Sen built TurnoMaster, a shift management web application with role-based access and deployment using Docker.",
-        "tags": [
-            "Fullstack",
-            "Backend",
-            "Web App",
-            "Docker"
-        ],
-        "github_url": "https://github.com/albamdls/turno-master",
-        "live_url": ""
-    },
-    {
-        "id": "project-4",
-        "section": "projects",
-        "type": "project",
-        "title": "AI Knowledge Assistant",
-        "subtitle": "AI / RAG / Backend / API",
-        "date_range": "",
-        "skills": [
-            "Python",
-            "FastAPI",
-            "LangChain",
-            "ChromaDB",
-            "OpenAI",
-            "Docker"
-        ],
-        "summary": {
-            "es": "Asistente de IA que responde preguntas sobre documentos del usuario mediante RAG, embeddings, historial de chat y trazabilidad de fuentes.",
-            "en": "AI assistant that answers questions about user documents using RAG, embeddings, chat history, and source traceability."
-        },
-        "highlights": {
-            "es": [
-                "Está construido con Python y FastAPI.",
-                "Usa LangChain, embeddings y búsqueda vectorial."
-            ],
-            "en": [
-                "It is built with Python and FastAPI.",
-                "It uses LangChain, embeddings, and vector search."
-            ]
-        },
-        "keywords": [
-            "langchain project",
-            "rag project",
-            "ai assistant",
-            "proyecto langchain",
-            "proyecto rag",
-            "asistente de ia",
-            "fastapi",
-            "embeddings"
-        ],
-        "content": "Alba Mora de la Sen built AI Knowledge Assistant, an AI assistant that answers questions from user documents using RAG with embeddings and vector search.",
-        "tags": [
-            "AI",
-            "RAG",
-            "Backend",
-            "API"
-        ],
-        "github_url": "https://github.com/albamdls/ai-knowledge-assistant",
-        "live_url": ""
-    },
-    {
-        "id": "project-5",
-        "section": "projects",
-        "type": "project",
-        "title": "AWS Notes (MkDocs)",
-        "subtitle": "Documentation / AWS / Static Site",
-        "date_range": "",
-        "skills": [
-            "MkDocs",
-            "Material for MkDocs",
-            "GitHub Pages"
-        ],
-        "summary": {
-            "es": "Sitio de documentación con apuntes estructurados de AWS Cloud Practitioner y despliegue estático.",
-            "en": "Documentation site with structured AWS Cloud Practitioner notes and static deployment."
-        },
-        "highlights": {
-            "es": [
-                "Usa MkDocs y Material for MkDocs.",
-                "Se publica con GitHub Pages."
-            ],
-            "en": [
-                "It uses MkDocs and Material for MkDocs.",
-                "It is published with GitHub Pages."
-            ]
-        },
-        "keywords": [
-            "aws project",
-            "documentation project",
-            "mkdocs",
-            "proyecto aws",
-            "documentación",
-            "sitio estático"
-        ],
-        "content": "Alba Mora de la Sen built AWS Notes, a documentation site for AWS Cloud Practitioner modules with structured notes.",
-        "tags": [
-            "Documentation",
-            "AWS",
-            "Static Site"
-        ],
-        "github_url": "https://github.com/albamdls/aws-notes",
-        "live_url": ""
-    },
-    {
-        "id": "project-6",
-        "section": "projects",
-        "type": "project",
-        "title": "WaterTrack Microservices Demo",
-        "subtitle": "DevOps / Docker / Backend / API",
-        "date_range": "",
-        "skills": [
-            "Docker Compose",
-            "Node.js",
-            "REST",
-            "PostgreSQL"
-        ],
-        "summary": {
-            "es": "Demo de microservicios orientada a arquitectura limpia, comunicación entre servicios y despliegue contenerizado.",
-            "en": "Microservices demo focused on clean architecture, service communication, and containerized deployment."
-        },
-        "highlights": {
-            "es": [
-                "Usa Docker Compose y PostgreSQL.",
-                "Se centra en conceptos de backend y APIs."
-            ],
-            "en": [
-                "It uses Docker Compose and PostgreSQL.",
-                "It focuses on backend and API concepts."
-            ]
-        },
-        "keywords": [
-            "docker project",
-            "microservices project",
-            "backend api",
-            "proyecto docker",
-            "microservicios",
-            "postgresql",
-            "api"
-        ],
-        "content": "Alba Mora de la Sen built WaterTrack Microservices Demo, a microservices demonstration focused on clean architecture and containerized deployment.",
-        "tags": [
-            "DevOps",
-            "Docker",
-            "Backend",
-            "API"
-        ],
-        "github_url": "https://github.com/albamdls/watertrack",
-        "live_url": ""
-    },
-    {
-        "id": "project-7",
-        "section": "projects",
-        "type": "project",
-        "title": "Pomodoro Pokémon",
-        "subtitle": "Cloud / AWS / Microservices",
-        "date_range": "",
-        "skills": [
-            "AWS ECS",
-            "ECR",
-            "API Gateway",
-            "Lambda",
-            "DynamoDB"
-        ],
-        "summary": {
-            "es": "Concepto de app de productividad con recompensas estilo Pokémon, planteado como laboratorio cloud-native de microservicios en AWS.",
-            "en": "Productivity app concept with Pokémon-style rewards, designed as a cloud-native microservices lab on AWS."
-        },
-        "highlights": {
-            "es": [
-                "Está relacionado con servicios cloud de AWS.",
-                "Incluye ECS, API Gateway, Lambda y DynamoDB."
-            ],
-            "en": [
-                "It is related to AWS cloud services.",
-                "It includes ECS, API Gateway, Lambda, and DynamoDB."
-            ]
-        },
-        "keywords": [
-            "aws project",
-            "cloud-native",
-            "microservices",
-            "proyecto aws",
-            "arquitectura cloud-native",
-            "ecs",
-            "lambda",
-            "dynamodb"
-        ],
-        "content": "Alba Mora de la Sen built Pomodoro Pokémon, a playful productivity app concept designed as a cloud-native microservices lab on AWS.",
-        "tags": [
-            "Cloud",
-            "AWS",
-            "Microservices"
-        ],
-        "github_url": "https://github.com/albamdls/pomodoro-pokemon",
-        "live_url": ""
-    },
-    {
-        "id": "project-8",
-        "section": "projects",
-        "type": "project",
-        "title": "Smart Search for Websites",
-        "subtitle": "AI / Search / Web Development",
-        "date_range": "",
-        "skills": [
-            "Python",
-            "BeautifulSoup",
-            "Embeddings",
-            "Vector Search"
-        ],
-        "summary": {
-            "es": "Buscador experimental que entiende la estructura y el contenido de una web para mejorar la descubribilidad y la experiencia de usuario.",
-            "en": "Experimental search experience that understands a website's structure and content to improve discoverability and user experience."
-        },
-        "highlights": {
-            "es": [
-                "Combina scraping y comprensión del contenido web.",
-                "Está relacionado con embeddings y búsqueda semántica."
-            ],
-            "en": [
-                "It combines scraping and understanding of website content.",
-                "It is related to embeddings and semantic search."
-            ]
-        },
-        "keywords": [
-            "search project",
-            "embeddings project",
-            "semantic search",
-            "proyecto de búsqueda",
-            "búsqueda semántica",
-            "web search",
-            "ai project"
-        ],
-        "content": "Alba Mora de la Sen built Smart Search for Websites, an experimental search bar that understands a website to improve discoverability and user experience.",
-        "tags": [
-            "AI",
-            "Search",
-            "Web Development"
-        ],
-        "github_url": "https://github.com/albamdls/smart-web-search",
-        "live_url": ""
     },
     {
         "id": "stack-summary-1",
@@ -1057,7 +896,7 @@
             "correo",
             "albamora.dev@gmail.com"
         ],
-        "content": "Alba Mora de la Sen can be contacted through her portfolio, by email at albamora.dev@gmail.com, on GitHub at https://github.com/albamdls, and on LinkedIn at https://www.linkedin.com/in/alba-mora-de-la-sen/.",
+        "content": "Alba Mora de la Sen can be contacted through her portfolio, by email at albamora.dev@gmail.com, on GitHub at https://github.com/albamdls, and on LinkedIn at https://www.linkedin.com/in/alba-mora-de-la-sen/. The best direct options are email and LinkedIn.",
         "links": {
             "portfolio": "https://albamora.dev",
             "email": "mailto:albamora.dev@gmail.com",

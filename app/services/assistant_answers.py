@@ -20,6 +20,7 @@ from app.services.assistant_core import (
     record_titles,
     serialize_history,
     stack_records,
+    find_technologies,
     technology_records,
 )
 from app.services.llm import generate_hf_chat
@@ -235,9 +236,9 @@ def technology_presence_answer(language: str, technology: str | None) -> str:
             if language == "es"
             else f"{technology} is not included in Alba's portfolio."
         )
-    project_matches = [record for record in matches if record["section"] == "projects"]
+    project_matches = [record for record in matches if record.get("type") == "project"]
     role_matches = [record for record in matches if record["type"] in {"current_role", "anchor_current_role"}]
-    stack_matches = [record for record in matches if record["section"] == "stack"]
+    stack_matches = [record for record in matches if record["section"] == "stack" and not str(record.get("id", "")).startswith("anchor-")]
     if language == "es":
         if role_matches:
             return f"Sí. {technology} forma parte del stack de Alba y también aparece en la información de su rol actual."
@@ -303,15 +304,13 @@ def in_progress_certification_answer(language: str) -> str:
 
 def contact_answer(language: str) -> str:
     record = contact_summary_record()
-    portfolio = next((link for link in record["links"] if "albamora.dev" in link), None)
     email = next((link for link in record["links"] if link.startswith("mailto:")), None)
-    github = next((link for link in record["links"] if "github.com" in link), None)
     linkedin = next((link for link in record["links"] if "linkedin.com" in link), None)
     email_text = email.replace("mailto:", "") if email else None
     return (
-        f"Puedes contactar con Alba a través de su portfolio ({portfolio}), por email ({email_text}), GitHub ({github}) o LinkedIn ({linkedin})."
+        f"Puedes contactar con Alba por email ({email_text}) o por LinkedIn ({linkedin}). Si quieres, usa el botón de contacto para escribirle directamente."
         if language == "es"
-        else f"You can contact Alba through her portfolio ({portfolio}), by email ({email_text}), on GitHub ({github}), or on LinkedIn ({linkedin})."
+        else f"You can contact Alba by email ({email_text}) or on LinkedIn ({linkedin}). If you want, use the contact button to reach out directly."
     )
 
 
@@ -439,6 +438,59 @@ def experience_duration_answer(language: str) -> str:
     )
 
 
+def location_answer(language: str) -> str:
+    return "Alba está basada en Madrid, España." if language == "es" else "Alba is based in Madrid, Spain."
+
+
+def remote_availability_answer(language: str) -> str:
+    return (
+        "Sí, Alba está abierta a oportunidades remotas."
+        if language == "es"
+        else "Yes, Alba is open to remote opportunities."
+    )
+
+
+def project_availability_answer(language: str) -> str:
+    return (
+        "Sí, Alba está abierta a nuevos proyectos y colaboraciones."
+        if language == "es"
+        else "Yes, Alba is open to new projects and collaborations."
+    )
+
+
+def spoken_languages_answer(language: str) -> str:
+    record = next((item for item in raw_records("about") if item.get("type") == "languages_profile"), None)
+    if not record:
+        return natural_unavailable(language)
+
+    if language == "es":
+        return "Alba habla español nativo e inglés con un nivel intermedio, tanto escrito como hablado."
+    return "Alba speaks native Spanish and intermediate English, both written and spoken."
+
+
+def technology_presence_multi_answer(language: str, technologies: list[str]) -> str:
+    available: list[str] = []
+    missing: list[str] = []
+    for technology in technologies:
+        matches = technology_records(technology)
+        if matches:
+            available.append(technology)
+        else:
+            missing.append(technology)
+
+    if available and not missing:
+        if language == "es":
+            return f"Sí. Alba trabaja con {join_items(available, 'es')}."
+        return f"Yes. Alba works with {join_items(available, 'en')}."
+
+    if available and missing:
+        if language == "es":
+            return f"Alba trabaja con {join_items(available, 'es')}, pero {join_items(missing, 'es')} no aparece en su portfolio."
+        return f"Alba works with {join_items(available, 'en')}, but {join_items(missing, 'en')} is not included in her portfolio."
+
+    return natural_unavailable(language)
+
+
 def status_follow_up_answer(language: str, turns: list[dict]) -> str:
     last = latest_relevant_turn(turns)
     if not last:
@@ -456,9 +508,9 @@ def status_follow_up_answer(language: str, turns: list[dict]) -> str:
 
 def most_relevant_project_answer(language: str) -> str:
     return (
-        "Si el foco es fullstack, IA y datos, uno de los proyectos más relevantes es AI Knowledge Assistant."
+        "Si el foco es fullstack, IA y datos, uno de los proyectos más relevantes es DocuMind AI."
         if language == "es"
-        else "If the focus is fullstack, AI, and data, one of the most relevant projects is AI Knowledge Assistant."
+        else "If the focus is fullstack, AI, and data, one of the most relevant projects is DocuMind AI."
     )
 
 
@@ -467,11 +519,15 @@ def deterministic_answer(query: dict, turns: list[dict]) -> str | None:
     language = query["language"]
     style = query["style"]
     technology = query["technology"]
+    technologies = query.get("technologies", [])
 
     direct_answers = {
         "out_of_scope": natural_out_of_scope(language),
         "background": background_answer(language),
         "current_focus": current_focus_answer(language),
+        "location": location_answer(language),
+        "remote_availability": remote_availability_answer(language),
+        "project_availability": project_availability_answer(language),
         "current_role": current_role_answer(language, style),
         "current_role_tasks": current_role_tasks_answer(language),
         "current_role_tech": current_role_tech_answer(language),
@@ -487,6 +543,7 @@ def deterministic_answer(query: dict, turns: list[dict]) -> str | None:
         "in_progress_certification": in_progress_certification_answer(language),
         "contact": contact_answer(language),
         "focus_preference": focus_preference_answer(language),
+        "spoken_languages": spoken_languages_answer(language),
         "status_follow_up": status_follow_up_answer(language, turns),
         "most_relevant_project": most_relevant_project_answer(language),
     }
@@ -496,6 +553,8 @@ def deterministic_answer(query: dict, turns: list[dict]) -> str | None:
         return response_style_adjust(stack_category_answer(language, intent), style, language)
     if intent == "technology_presence":
         return response_style_adjust(technology_presence_answer(language, technology), style, language)
+    if intent == "technology_presence_multi":
+        return response_style_adjust(technology_presence_multi_answer(language, technologies or find_technologies(query["resolved_message"])), style, language)
     if intent == "project_by_technology":
         return response_style_adjust(project_by_technology_answer(language, technology), style, language)
     return None

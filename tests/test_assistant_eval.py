@@ -41,11 +41,11 @@ class AssistantEvalTests(unittest.TestCase):
             },
             {
                 "message": "What projects has Alba built?",
-                "expected": ["8 portfolio projects", "ai knowledge assistant", "pomodoro pokémon"],
+                "expected": ["3 portfolio projects", "documind ai", "personal portfolio website", "aws quiz tracker"],
             },
             {
                 "message": "Which project is related to LangChain?",
-                "expected": ["ai knowledge assistant"],
+                "expected": ["documind ai"],
             },
             {
                 "message": "What certifications does Alba have?",
@@ -54,11 +54,30 @@ class AssistantEvalTests(unittest.TestCase):
             },
             {
                 "message": "How can I contact Alba?",
-                "expected": ["albamora.dev", "albamora.dev@gmail.com", "github.com/albamdls", "linkedin.com/in/alba-mora-de-la-sen"],
+                "expected": ["albamora.dev@gmail.com", "linkedin.com/in/alba-mora-de-la-sen", "contact button"],
+                "section": "contact",
             },
             {
                 "message": "How long has Alba been working as a developer?",
                 "expected": ["started working as a developer", "march", "months of professional experience"],
+            },
+            {
+                "message": "What technologies does Alba use in her current role?",
+                "expected": ["python", "flask", "javascript", "docker", "kubernetes"],
+                "section": "experience",
+            },
+            {
+                "message": "Tell me about Alba's education.",
+                "expected": ["Higher Technician in Data and Process Analysis", "Higher Technician in Web Application Development", "Higher Technician in Business Administration and Finance"],
+                "forbidden": ["Higher Technician in Web and Multimedia Management"],
+            },
+            {
+                "message": "Which languages speaks Alba?",
+                "expected": ["native spanish", "intermediate english"],
+            },
+            {
+                "message": "Does Alba use AWS or Kubernetes?",
+                "expected": ["aws", "kubernetes"],
             },
             {
                 "message": "Does Alba use Python?",
@@ -118,11 +137,21 @@ class AssistantEvalTests(unittest.TestCase):
             },
             {
                 "message": "¿Cómo puedo contactar con Alba?",
-                "expected": ["portfolio", "albamora.dev@gmail.com", "github", "linkedin"],
+                "expected": ["albamora.dev@gmail.com", "linkedin", "botón de contacto"],
+                "section": "contact",
             },
             {
                 "message": "¿Cuánto tiempo lleva trabajando Alba como desarrolladora?",
                 "expected": ["empezó", "marzo", "meses de experiencia profesional"],
+            },
+            {
+                "message": "¿Qué idiomas habla Alba?",
+                "expected": ["español nativo", "inglés", "escrito", "hablado"],
+            },
+            {
+                "message": "¿Qué tecnologías usa en su rol actual?",
+                "expected": ["python", "flask", "javascript", "docker", "kubernetes"],
+                "section": "experience",
             },
             {
                 "message": "¿Usa Alba Python?",
@@ -136,6 +165,8 @@ class AssistantEvalTests(unittest.TestCase):
                 payload = self.ask(case["message"], f"es-{idx}")
                 self.assertContains(payload["answer"], case["expected"], case["message"])
                 self.assertNotContains(payload["answer"], case.get("forbidden", []), case["message"])
+                if "section" in case:
+                    self.assertEqual(payload["section_hint"], case["section"], case["message"])
 
     def test_follow_up_resolution_for_current_role(self):
         session = "followup-current-role"
@@ -149,6 +180,15 @@ class AssistantEvalTests(unittest.TestCase):
         self.assertContains(third["answer"], ["python", "flask", "docker"], "current role tech follow-up")
         self.assertContains(fourth["answer"], ["current"], "status follow-up")
         self.assertContains(fifth["answer"], ["software developer intern", "siemens"], "tell me more follow-up")
+
+    def test_follow_up_resolution_for_current_role_in_spanish(self):
+        session = "followup-current-role-es"
+        self.ask("¿Qué experiencia profesional tiene Alba?", session)
+        second = self.ask("¿Y su rol actual?", session)
+        third = self.ask("¿Qué usa ahí?", session)
+
+        self.assertContains(second["answer"], ["siemens", "apis backend"], "current role follow-up es")
+        self.assertContains(third["answer"], ["python", "flask", "docker"], "current role tech follow-up es")
 
     def test_follow_up_resolution_for_stack(self):
         session = "followup-stack"
