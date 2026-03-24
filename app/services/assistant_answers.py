@@ -1,3 +1,6 @@
+import calendar
+from datetime import date
+
 from app.services.assistant_core import (
     build_context,
     certifications_records,
@@ -300,12 +303,15 @@ def in_progress_certification_answer(language: str) -> str:
 
 def contact_answer(language: str) -> str:
     record = contact_summary_record()
+    portfolio = next((link for link in record["links"] if "albamora.dev" in link), None)
+    email = next((link for link in record["links"] if link.startswith("mailto:")), None)
     github = next((link for link in record["links"] if "github.com" in link), None)
     linkedin = next((link for link in record["links"] if "linkedin.com" in link), None)
+    email_text = email.replace("mailto:", "") if email else None
     return (
-        f"Puedes contactar con Alba a través de su portfolio, GitHub ({github}) o LinkedIn ({linkedin})."
+        f"Puedes contactar con Alba a través de su portfolio ({portfolio}), por email ({email_text}), GitHub ({github}) o LinkedIn ({linkedin})."
         if language == "es"
-        else f"You can contact Alba through her portfolio, GitHub ({github}), or LinkedIn ({linkedin})."
+        else f"You can contact Alba through her portfolio ({portfolio}), by email ({email_text}), on GitHub ({github}), or on LinkedIn ({linkedin})."
     )
 
 
@@ -314,6 +320,122 @@ def focus_preference_answer(language: str) -> str:
         "Ahora mismo, el foco de Alba está más alineado con fullstack, inteligencia artificial y datos que con cloud como eje principal."
         if language == "es"
         else "Right now, Alba's focus is more aligned with fullstack development, artificial intelligence, and data than with cloud as the primary emphasis."
+    )
+
+
+MONTHS = {
+    "jan": 1,
+    "feb": 2,
+    "mar": 3,
+    "apr": 4,
+    "may": 5,
+    "jun": 6,
+    "jul": 7,
+    "aug": 8,
+    "sep": 9,
+    "oct": 10,
+    "nov": 11,
+    "dec": 12,
+}
+
+
+def _parse_month_token(value: str) -> int:
+    return MONTHS[value.strip()[:3].lower()]
+
+
+def _parse_date_range(date_range: str) -> tuple[date, date] | None:
+    if " - " not in date_range:
+        return None
+
+    start_text, end_text = [part.strip() for part in date_range.split(" - ", 1)]
+    start_parts = start_text.split()
+    if len(start_parts) != 2:
+        return None
+
+    start_month = _parse_month_token(start_parts[0])
+    start_year = int(start_parts[1])
+    start_date = date(start_year, start_month, 1)
+
+    if end_text.lower() == "present":
+        return start_date, date.today()
+
+    end_parts = end_text.split()
+    if len(end_parts) != 2:
+        return None
+
+    end_month = _parse_month_token(end_parts[0])
+    end_year = int(end_parts[1])
+    last_day = calendar.monthrange(end_year, end_month)[1]
+    end_date = date(end_year, end_month, last_day)
+    return start_date, end_date
+
+
+def _experience_duration_stats() -> tuple[date | None, int]:
+    intervals: list[tuple[date, date]] = []
+    for record in raw_records("experience"):
+        parsed = _parse_date_range(record.get("date_range", ""))
+        if parsed:
+            intervals.append(parsed)
+
+    if not intervals:
+        return None, 0
+
+    earliest_start = min(start for start, _ in intervals)
+    total_days = sum((end - start).days + 1 for start, end in intervals)
+    return earliest_start, total_days
+
+
+def _format_date_for_answer(value: date, language: str) -> str:
+    months_es = [
+        "enero",
+        "febrero",
+        "marzo",
+        "abril",
+        "mayo",
+        "junio",
+        "julio",
+        "agosto",
+        "septiembre",
+        "octubre",
+        "noviembre",
+        "diciembre",
+    ]
+    months_en = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ]
+    if language == "es":
+        return f"{value.day} de {months_es[value.month - 1]} de {value.year}"
+    return f"{months_en[value.month - 1]} {value.day}, {value.year}"
+
+
+def experience_duration_answer(language: str) -> str:
+    start_date, total_days = _experience_duration_stats()
+    if not start_date or total_days <= 0:
+        return natural_unavailable(language)
+
+    approx_months = round(total_days / 30.44)
+    as_of = _format_date_for_answer(date.today(), language)
+    started = _format_date_for_answer(start_date, language)
+
+    if language == "es":
+        return (
+            f"Alba empezó a trabajar como desarrolladora en {started}. "
+            f"Sumando sus dos etapas en Siemens, acumula aproximadamente {approx_months} meses de experiencia profesional a fecha de {as_of}."
+        )
+    return (
+        f"Alba started working as a developer in {started}. "
+        f"Across her two Siemens periods, she has approximately {approx_months} months of professional experience as of {as_of}."
     )
 
 
@@ -353,6 +475,7 @@ def deterministic_answer(query: dict, turns: list[dict]) -> str | None:
         "current_role": current_role_answer(language, style),
         "current_role_tasks": current_role_tasks_answer(language),
         "current_role_tech": current_role_tech_answer(language),
+        "experience_duration": experience_duration_answer(language),
         "experience_summary": experience_summary_answer(language),
         "projects_summary": projects_summary_answer(language),
         "project_technology_frequency": project_technology_frequency_answer(language),

@@ -54,7 +54,11 @@ class AssistantEvalTests(unittest.TestCase):
             },
             {
                 "message": "How can I contact Alba?",
-                "expected": ["github.com/albamdls", "linkedin.com/in/alba-mora-de-la-sen"],
+                "expected": ["albamora.dev", "albamora.dev@gmail.com", "github.com/albamdls", "linkedin.com/in/alba-mora-de-la-sen"],
+            },
+            {
+                "message": "How long has Alba been working as a developer?",
+                "expected": ["started working as a developer", "march", "months of professional experience"],
             },
             {
                 "message": "Does Alba use Python?",
@@ -106,6 +110,7 @@ class AssistantEvalTests(unittest.TestCase):
             {
                 "message": "¿En qué está enfocada Alba ahora mismo?",
                 "expected": ["desarrollo fullstack", "inteligencia artificial", "datos"],
+                "forbidden": ["fullstack development", "artificial intelligence"],
             },
             {
                 "message": "¿Qué certificaciones tiene Alba?",
@@ -113,7 +118,16 @@ class AssistantEvalTests(unittest.TestCase):
             },
             {
                 "message": "¿Cómo puedo contactar con Alba?",
-                "expected": ["github", "linkedin"],
+                "expected": ["portfolio", "albamora.dev@gmail.com", "github", "linkedin"],
+            },
+            {
+                "message": "¿Cuánto tiempo lleva trabajando Alba como desarrolladora?",
+                "expected": ["empezó", "marzo", "meses de experiencia profesional"],
+            },
+            {
+                "message": "¿Usa Alba Python?",
+                "expected": ["sí", "python"],
+                "forbidden": ["yes"],
             },
         ]
 
@@ -121,6 +135,7 @@ class AssistantEvalTests(unittest.TestCase):
             with self.subTest(case=case["message"]):
                 payload = self.ask(case["message"], f"es-{idx}")
                 self.assertContains(payload["answer"], case["expected"], case["message"])
+                self.assertNotContains(payload["answer"], case.get("forbidden", []), case["message"])
 
     def test_follow_up_resolution_for_current_role(self):
         session = "followup-current-role"
@@ -157,4 +172,3 @@ class AssistantEvalTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

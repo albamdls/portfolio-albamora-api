@@ -25,17 +25,38 @@ OUT_OF_SCOPE_HINTS = (
 )
 
 SPANISH_MARKERS = (
-    "¿",
-    " qué ",
-    " cómo ",
-    " cual ",
-    " cuál ",
-    " dónde ",
-    " tecnologías ",
-    " experiencia ",
-    " certificaciones ",
-    " proyectos ",
-    " contacto ",
+    "qué",
+    "como",
+    "cómo",
+    "cual",
+    "cuál",
+    "donde",
+    "dónde",
+    "quien",
+    "quién",
+    "tecnologías",
+    "tecnologias",
+    "experiencia",
+    "certificaciones",
+    "proyectos",
+    "contacto",
+    "actualmente",
+    "ahora",
+    "stack",
+    "rol",
+)
+
+ENGLISH_MARKERS = (
+    "what",
+    "how",
+    "which",
+    "tell me",
+    "current",
+    "experience",
+    "projects",
+    "contact",
+    "stack",
+    "skills",
 )
 
 TECH_ALIASES = {
@@ -94,12 +115,32 @@ def poor_answer(text: str) -> bool:
 
 
 def detect_language(user_message: str) -> str:
-    normalized = f" {normalize_text(user_message)} "
-    if normalized.startswith(" answer in spanish") or " en español" in normalized:
+    normalized = normalize_text(user_message)
+    bounded = f" {normalized} "
+
+    if bounded.startswith(" answer in spanish") or " en español" in bounded:
         return "es"
-    if normalized.startswith(" answer in english") or " en inglés" in normalized or " en ingles" in normalized:
+    if bounded.startswith(" answer in english") or " en inglés" in bounded or " en ingles" in bounded:
         return "en"
-    if any(marker in normalized or marker == "¿" and "¿" in user_message for marker in SPANISH_MARKERS):
+
+    spanish_score = 0
+    english_score = 0
+
+    if any(char in user_message for char in "¿¡áéíóúñ"):
+        spanish_score += 2
+
+    for marker in SPANISH_MARKERS:
+        if contains_term(normalized, marker):
+            spanish_score += 1
+
+    for marker in ENGLISH_MARKERS:
+        if marker in {"tell me"}:
+            if marker in normalized:
+                english_score += 1
+        elif contains_term(normalized, marker):
+            english_score += 1
+
+    if spanish_score > english_score:
         return "es"
     return "en"
 
@@ -262,7 +303,18 @@ def resolve_follow_up(user_message: str, turns: list[dict]) -> str:
     turn = latest_relevant_turn(turns)
     topic = turn["topic"] if turn else None
 
-    if normalized in {"tell me more.", "tell me more", "can you expand on that?", "can you expand on that"}:
+    if normalized in {
+        "tell me more.",
+        "tell me more",
+        "can you expand on that?",
+        "can you expand on that",
+        "cuéntame más",
+        "cuentame más",
+        "cuentame mas",
+        "cuéntame mas",
+        "puedes ampliar eso",
+        "puedes ampliar eso?",
+    }:
         mapping = {
             "experience_summary": "Tell me more about Alba's professional experience.",
             "current_role": "Tell me more about Alba's current role at Siemens.",
@@ -274,13 +326,34 @@ def resolve_follow_up(user_message: str, turns: list[dict]) -> str:
         }
         return mapping.get(topic, user_message)
 
-    if normalized in {"and her stack?", "and her stack", "what about her stack?", "what about her stack"}:
+    if normalized in {
+        "and her stack?",
+        "and her stack",
+        "what about her stack?",
+        "what about her stack",
+        "y su stack?",
+        "y su stack",
+        "y sus tecnologías?",
+        "y sus tecnologias?",
+        "y sus tecnologias",
+    }:
         return "What technologies does Alba use?"
     if "current role" in normalized:
         return "What is Alba doing at Siemens right now?"
-    if normalized in {"what else has she done?", "what else has she done"} and topic in {"current_role", "experience_summary"}:
+    if "rol actual" in normalized:
+        return "What is Alba doing at Siemens right now?"
+    if normalized in {"what else has she done?", "what else has she done", "qué más ha hecho?", "que más ha hecho?", "que mas ha hecho"} and topic in {"current_role", "experience_summary"}:
         return "Tell me about Alba's professional experience."
-    if normalized in {"what does she use there?", "what does she use there"} and topic in {"current_role", "experience_summary", "current_role_tech"}:
+    if normalized in {
+        "what does she use there?",
+        "what does she use there",
+        "qué usa allí?",
+        "que usa allí?",
+        "que usa alli?",
+        "qué usa alli?",
+        "qué tecnologías usa ahí?",
+        "que tecnologías usa ahi?",
+    } and topic in {"current_role", "experience_summary", "current_role_tech"}:
         return "What technologies does Alba use in her current role?"
     return user_message
 
@@ -316,12 +389,25 @@ def classify_query(user_message: str, turns: list[dict]) -> dict:
         intent = "contact"
     elif "what is alba focused on" in normalized or "en qué está enfocada alba" in normalized or "focused on right now" in normalized:
         intent = "current_focus"
-    elif "what is alba doing at siemens" in normalized or "qué hace alba actualmente en siemens" in normalized or "tell me about alba's current role" in normalized or "tell me more about alba's current role" in normalized:
+    elif "what is alba doing at siemens" in normalized or "qué hace alba actualmente en siemens" in normalized or "que hace alba actualmente en siemens" in normalized or "qué hace alba ahora mismo en siemens" in normalized or "que hace alba ahora mismo en siemens" in normalized or "tell me about alba's current role" in normalized or "tell me more about alba's current role" in normalized:
         intent = "current_role"
     elif "what technologies does alba use in her current role" in normalized:
         intent = "current_role_tech"
     elif "what does alba do in the siemens eda environment" in normalized:
         intent = "current_role_tasks"
+    elif (
+        "how long has alba been working" in normalized
+        or "how long has alba been working as a developer" in normalized
+        or "how long has alba worked as a developer" in normalized
+        or "how much experience does alba have" in normalized
+        or "cuánto tiempo lleva trabajando alba" in normalized
+        or "cuanto tiempo lleva trabajando alba" in normalized
+        or "cuánto tiempo lleva alba trabajando" in normalized
+        or "cuanto tiempo lleva alba trabajando" in normalized
+        or "cuánto tiempo lleva trabajando alba como desarrolladora" in normalized
+        or "cuanto tiempo lleva trabajando alba como desarrolladora" in normalized
+    ):
+        intent = "experience_duration"
     elif "tell me about alba's professional experience" in normalized or "tell me more about alba's professional experience" in normalized or "qué experiencia profesional tiene alba" in normalized or "tell me about alba's experience" in normalized:
         intent = "experience_summary"
     elif "tell me about alba's education" in normalized or "qué formación tiene alba" in normalized:
@@ -342,17 +428,17 @@ def classify_query(user_message: str, turns: list[dict]) -> dict:
         intent = "project_technology_frequency"
     elif "is alba more focused on fullstack" in normalized:
         intent = "focus_preference"
-    elif "what backend technologies" in normalized:
+    elif "what backend technologies" in normalized or "qué tecnologías de backend" in normalized or "que tecnologías de backend" in normalized or "que tecnologias de backend" in normalized:
         intent = "stack_backend"
-    elif "what frontend technologies" in normalized:
+    elif "what frontend technologies" in normalized or "qué tecnologías de frontend" in normalized or "que tecnologías de frontend" in normalized or "que tecnologias de frontend" in normalized:
         intent = "stack_frontend"
-    elif "ai or data tools" in normalized:
+    elif "ai or data tools" in normalized or "herramientas de ia o datos" in normalized or "ia o datos" in normalized:
         intent = "stack_ai_data"
-    elif "cloud and devops tools" in normalized:
+    elif "cloud and devops tools" in normalized or "herramientas de cloud y devops" in normalized or "cloud y devops" in normalized:
         intent = "stack_cloud_devops"
-    elif "what databases does alba know" in normalized:
+    elif "what databases does alba know" in normalized or "qué bases de datos conoce alba" in normalized or "que bases de datos conoce alba" in normalized:
         intent = "stack_databases"
-    elif "what technologies does alba use" in normalized or "tell me more about alba's stack" in normalized or "qué tecnologías principales usa alba" in normalized or "and her stack" in normalized:
+    elif "what technologies does alba use" in normalized or "tell me more about alba's stack" in normalized or "qué tecnologías principales usa alba" in normalized or "que tecnologías principales usa alba" in normalized or "qué tecnologías usa alba" in normalized or "que tecnologías usa alba" in normalized or "que tecnologias usa alba" in normalized or "and her stack" in normalized:
         intent = "stack_summary"
     elif normalized.startswith("does alba use ") and technology:
         intent = "technology_presence"
@@ -399,6 +485,7 @@ def intent_to_section(intent: str) -> str | None:
         "current_role": "experience",
         "current_role_tasks": "experience",
         "current_role_tech": "experience",
+        "experience_duration": "experience",
         "experience_summary": "experience",
         "stack_summary": "stack",
         "stack_backend": "stack",
@@ -443,6 +530,8 @@ def relevant_record_ids(intent: str, technology: str | None) -> list[str]:
         return ["anchor-current-focus"]
     if intent in {"current_role", "current_role_tasks", "current_role_tech"}:
         return ["anchor-current-role"]
+    if intent == "experience_duration":
+        return [record["id"] for record in raw_records("experience")] + ["anchor-current-role"]
     if intent == "experience_summary":
         return [record["id"] for record in raw_records("experience")] + ["anchor-current-role"]
     if intent.startswith("stack_") or intent == "stack_summary":

@@ -20,6 +20,63 @@ def _normalize_text(value: str) -> str:
     return " ".join((value or "").split())
 
 
+def _flatten_text_values(value) -> list[str]:
+    if isinstance(value, dict):
+        ordered_keys = ["en", "es"]
+        items: list[str] = []
+        for key in ordered_keys:
+            if key in value:
+                items.extend(_flatten_text_values(value[key]))
+        for key, nested in value.items():
+            if key not in ordered_keys:
+                items.extend(_flatten_text_values(nested))
+        return _dedupe(items)
+    if isinstance(value, list):
+        items: list[str] = []
+        for item in value:
+            items.extend(_flatten_text_values(item))
+        return _dedupe(items)
+    text = _normalize_text(str(value or ""))
+    return [text] if text else []
+
+
+def _preferred_text(value, preferred_language: str = "en") -> str:
+    if isinstance(value, dict):
+        preferred = _normalize_text(str(value.get(preferred_language, "")))
+        if preferred:
+            return preferred
+        for nested in value.values():
+            fallback = _preferred_text(nested, preferred_language)
+            if fallback:
+                return fallback
+        return ""
+    if isinstance(value, list):
+        for item in value:
+            fallback = _preferred_text(item, preferred_language)
+            if fallback:
+                return fallback
+        return ""
+    return _normalize_text(str(value or ""))
+
+
+def _preferred_list(value, preferred_language: str = "en") -> list[str]:
+    if isinstance(value, dict):
+        preferred = value.get(preferred_language)
+        preferred_list = _preferred_list(preferred, preferred_language)
+        if preferred_list:
+            return preferred_list
+        for nested in value.values():
+            fallback = _preferred_list(nested, preferred_language)
+            if fallback:
+                return fallback
+        return []
+    if isinstance(value, list):
+        return _dedupe([_normalize_text(str(item)) for item in value if _normalize_text(str(item))])
+    if isinstance(value, str):
+        return _content_highlights(value)
+    return []
+
+
 def _first_sentence(value: str) -> str:
     text = _normalize_text(value)
     if not text:
@@ -29,10 +86,11 @@ def _first_sentence(value: str) -> str:
     return match.group(1).strip() if match else text
 
 
-def _extract_links(value: str) -> list[str]:
-    if not value:
-        return []
-    return [match.rstrip(".,)") for match in re.findall(r"https?://[^\s)]+", value)]
+def _extract_links(value) -> list[str]:
+    links: list[str] = []
+    for text in _flatten_text_values(value):
+        links.extend(match.rstrip(".,)") for match in re.findall(r"https?://[^\s)]+", text))
+    return _dedupe(links)
 
 
 def _dedupe(items: list[str]) -> list[str]:
@@ -69,14 +127,25 @@ def _content_highlights(content: str) -> list[str]:
 
 
 def _item_type(item: dict) -> str:
+    explicit_type = item.get("type")
+    if explicit_type:
+        return explicit_type
     section = item.get("section")
     if section == "about":
         return "profile"
     if section == "experience":
+        if item.get("current") is True:
+            return "current_role"
         return "current_role" if "present" in (item.get("date_range", "").lower()) else "past_role"
     if section == "education":
+        if item.get("current") is True:
+            return "current_study"
         return "current_study" if "present" in (item.get("date_range", "").lower()) or "2026" in (item.get("date_range", "")) else "education_record"
     if section == "certifications":
+        if item.get("completed") is True:
+            return "completed_certification"
+        if item.get("in_progress") is True:
+            return "in_progress_certification"
         status = (item.get("status") or "").lower()
         if status == "completed":
             return "completed_certification"
@@ -106,11 +175,12 @@ def _collect_links(item: dict) -> list[str]:
         if value:
             links.append(str(value))
 
-    links.extend(_extract_links(item.get("content", "")))
+    for field_name in ("content", "summary", "highlights"):
+        links.extend(_extract_links(item.get(field_name, "")))
     return _dedupe(links)
 
 
-def _build_keywords(item: dict, highlights: list[str]) -> list[str]:
+def _build_keywords(item: dict, highlights: list[str], summary: str, content: str) -> list[str]:
     keywords: list[str] = []
 
     for key in ("section", "title", "subtitle", "date_range", "status", "code", "company", "institution"):
@@ -123,7 +193,15 @@ def _build_keywords(item: dict, highlights: list[str]) -> list[str]:
         if isinstance(values, list):
             keywords.extend(str(value) for value in values if value)
 
+    raw_keywords = item.get("keywords", [])
+    if isinstance(raw_keywords, list):
+        keywords.extend(str(value) for value in raw_keywords if value)
+
+    keywords.extend(_flatten_text_values(item.get("summary", "")))
+    keywords.extend(_flatten_text_values(item.get("highlights", [])))
     keywords.extend(highlights)
+    keywords.append(summary)
+    keywords.append(content)
     keywords.extend(_extract_links(item.get("content", "")))
     return _dedupe(keywords)
 
@@ -131,11 +209,16 @@ def _build_keywords(item: dict, highlights: list[str]) -> list[str]:
 def _normalize_record(item: dict) -> dict:
     section = item.get("section")
     record_type = _item_type(item)
-    content = _normalize_text(item.get("content", ""))
-    highlights = _content_highlights(content)
-    summary = _first_sentence(content)
+    content_parts = _flatten_text_values(item.get("content", "")) + _flatten_text_values(item.get("summary", "")) + _flatten_text_values(item.get("highlights", []))
+    content = _normalize_text(" ".join(_dedupe(content_parts)))
+    primary_content = _preferred_text(item.get("content", ""), "en")
+    summary = _preferred_text(item.get("summary", ""), "en") or _first_sentence(primary_content or content)
+    highlights = _preferred_list(item.get("highlights", []), "en") or _content_highlights(primary_content or content)
     links = _collect_links(item)
     status = (item.get("status") or "").lower()
+    current = bool(item.get("current")) or record_type in {"current_role", "current_study"}
+    completed = bool(item.get("completed")) or status == "completed"
+    in_progress = bool(item.get("in_progress")) or status == "in_progress"
 
     record = {
         "id": item.get("id"),
@@ -151,13 +234,15 @@ def _normalize_record(item: dict) -> dict:
         "keywords": [],
         "content": content,
         "links": links,
-        "current": record_type in {"current_role", "current_study"},
-        "completed": status == "completed",
-        "in_progress": status == "in_progress",
-        "status": status or None,
+        "current": current,
+        "completed": completed,
+        "in_progress": in_progress,
+        "status": "completed" if completed else "in_progress" if in_progress else (status or None),
         "code": item.get("code"),
         "github_url": item.get("github_url"),
         "live_url": item.get("live_url"),
+        "summary_localized": item.get("summary"),
+        "highlights_localized": item.get("highlights"),
     }
 
     if section == "experience":
@@ -167,7 +252,7 @@ def _normalize_record(item: dict) -> dict:
     if section == "certifications":
         record["issuer"] = item.get("subtitle", "")
 
-    record["keywords"] = _build_keywords({**item, **record}, highlights)
+    record["keywords"] = _build_keywords({**item, **record}, highlights, summary, content)
     return record
 
 
@@ -313,13 +398,15 @@ def _build_anchor_records(records: list[dict]) -> list[dict]:
             section="contact",
             record_type="anchor_contact_summary",
             title="Contact summary",
-            summary="Alba can be contacted through the portfolio contact section, GitHub, and LinkedIn.",
+            summary="Alba can be contacted through her portfolio, by email, on GitHub, and on LinkedIn.",
             highlights=[
+                "Portfolio: https://albamora.dev",
+                "Email: albamora.dev@gmail.com",
                 "GitHub: https://github.com/albamdls",
                 "LinkedIn: https://www.linkedin.com/in/alba-mora-de-la-sen/",
             ],
             links=contact["links"],
-            keywords=["contact", "github", "linkedin", "how can i contact alba"],
+            keywords=["contact", "email", "portfolio", "github", "linkedin", "how can i contact alba"],
         ),
         _anchor_record(
             record_id="anchor-stack-summary",

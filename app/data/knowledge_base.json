@@ -2,64 +2,216 @@
     {
         "id": "profile-1",
         "section": "about",
+        "type": "profile",
         "title": "Alba Mora de la Sen",
         "subtitle": "Fullstack Developer",
         "date_range": "",
-        "skills": [],
-        "content": "Alba Mora de la Sen is a Fullstack Developer currently focused on fullstack development, artificial intelligence, and data. She's a curious and restless person who is always looking for new knowledge and enjoys contributing to real-world projects.",
+        "skills": [
+            "Python",
+            "React",
+            "Angular",
+            "TypeScript",
+            "PostgreSQL",
+            "Docker",
+            "LangChain",
+            "AWS",
+            "Kubernetes"
+        ],
+        "summary": {
+            "es": "Alba Mora de la Sen es Fullstack Developer y actualmente está centrada en desarrollo fullstack, inteligencia artificial y datos.",
+            "en": "Alba Mora de la Sen is a Fullstack Developer currently focused on fullstack development, artificial intelligence, and data."
+        },
+        "highlights": {
+            "es": [
+                "Combina experiencia en software con formación en web, datos y negocio.",
+                "Su foco actual está en proyectos fullstack, IA aplicada y datos.",
+                "Está basada en Madrid, España.",
+                "Está abierta a oportunidades remotas y nuevos proyectos.",
+                "Le interesa construir productos digitales limpios, modernos y centrados en el usuario."
+            ],
+            "en": [
+                "She combines software experience with training in web, data, and business.",
+                "Her current focus is on fullstack projects, applied AI, and data.",
+                "She is based in Madrid, Spain.",
+                "She is open to remote opportunities and new projects.",
+                "She is interested in building clean, modern, user-centered digital products."
+            ]
+        },
+        "keywords": [
+            "background",
+            "profile",
+            "professional summary",
+            "resumen profesional",
+            "perfil",
+            "foco actual",
+            "current focus",
+            "fullstack",
+            "inteligencia artificial",
+            "artificial intelligence",
+            "datos",
+            "data",
+            "madrid",
+            "madrid spain",
+            "madrid españa",
+            "remote opportunities",
+            "open to remote opportunities",
+            "oportunidades remotas",
+            "available for projects",
+            "nuevos proyectos",
+            "digital products",
+            "user-centered products"
+        ],
+        "content": "Alba Mora de la Sen is a Fullstack Developer currently focused on fullstack development, artificial intelligence, and data. She is based in Madrid, Spain, open to remote opportunities, and interested in building clean, modern, user-centered digital products.",
         "links": {
             "github": "https://github.com/albamdls",
-            "linkedin": "https://www.linkedin.com/in/alba-mora-de-la-sen/"
+            "linkedin": "https://www.linkedin.com/in/alba-mora-de-la-sen/",
+            "portfolio": "https://albamora.dev",
+            "email": "mailto:albamora.dev@gmail.com"
         }
     },
     {
         "id": "experience-1",
         "section": "experience",
+        "type": "current_role",
         "title": "Software Developer Intern",
         "subtitle": "Siemens Mobility S.L.U.",
         "date_range": "Sep 2025 - Present",
+        "current": true,
         "skills": [
-            "Software Development",
-            "Teamwork",
-            "Software Engineering Practices",
-            "English"
+            "Python",
+            "Flask",
+            "JavaScript",
+            "Docker",
+            "Kubernetes",
+            "Rancher UI",
+            "APIs",
+            "Software Engineering Practices"
         ],
-        "content": "Alba Mora de la Sen works as a Software Developer Intern at Siemens Mobility S.L.U. since Sep 2025. She develops software within the Siemens EDA engineering environment, contributes to the development and maintenance of internal applications, collaborates with technical teams following modern software engineering practices and methodologies, and works in an international corporate environment."
+        "summary": {
+            "es": "Alba trabaja actualmente como Software Developer Intern en Siemens Mobility S.L.U., centrada en APIs backend, aplicaciones internas, despliegues e iniciativas de IA y datos.",
+            "en": "Alba currently works as a Software Developer Intern at Siemens Mobility S.L.U., focused on backend APIs, internal applications, deployments, and AI/data initiatives."
+        },
+        "highlights": {
+            "es": [
+                "Desarrolla APIs backend con Python y Flask.",
+                "Da soporte a aplicaciones internas con JavaScript.",
+                "Participa en despliegues con Docker, Kubernetes y Rancher UI.",
+                "Colabora en iniciativas de IA y datos."
+            ],
+            "en": [
+                "Develops backend APIs with Python and Flask.",
+                "Supports internal applications with JavaScript.",
+                "Contributes to deployments with Docker, Kubernetes, and Rancher UI.",
+                "Works on AI and data initiatives."
+            ]
+        },
+        "keywords": [
+            "siemens",
+            "current role",
+            "current job",
+            "rol actual",
+            "trabajo actual",
+            "qué hace alba en siemens",
+            "what is alba doing at siemens",
+            "backend",
+            "aplicaciones internas",
+            "internal applications",
+            "despliegues",
+            "deployments",
+            "python",
+            "flask",
+            "docker",
+            "kubernetes",
+            "ia",
+            "datos"
+        ],
+        "content": "Alba Mora de la Sen works as a Software Developer Intern at Siemens Mobility S.L.U. since Sep 2025. She develops software within the Siemens EDA engineering environment and contributes to internal applications and deployments."
     },
     {
         "id": "experience-2",
         "section": "experience",
+        "type": "past_role",
         "title": "Software Developer Intern",
         "subtitle": "Siemens Mobility S.L.U.",
         "date_range": "Mar 2025 - Jun 2025",
+        "current": false,
         "skills": [
             "Front-End Development",
-            "Software Development",
             "UI Development",
+            "Software Development",
             "Teamwork"
         ],
-        "content": "Alba Mora de la Sen worked as a Software Developer Intern at Siemens Mobility S.L.U. from Mar 2025 to Jun 2025. She supported software development tasks with a focus on front-end technologies, designed and implemented user interface components, collaborated with multidisciplinary teams in a hybrid working environment, and gained experience working on real-world software projects within a corporate setting."
+        "summary": {
+            "es": "En una etapa anterior en Siemens, Alba trabajó como Software Developer Intern con un foco más orientado a front-end y UI.",
+            "en": "In an earlier Siemens internship period, Alba worked as a Software Developer Intern with a stronger focus on front-end and UI work."
+        },
+        "highlights": {
+            "es": [
+                "Apoyó tareas de desarrollo con foco front-end.",
+                "Diseñó e implementó componentes de interfaz."
+            ],
+            "en": [
+                "Supported front-end-focused development tasks.",
+                "Designed and implemented UI components."
+            ]
+        },
+        "keywords": [
+            "previous role",
+            "past experience",
+            "experiencia previa",
+            "rol anterior",
+            "front-end",
+            "ui",
+            "siemens internship"
+        ],
+        "content": "Alba Mora de la Sen worked as a Software Developer Intern at Siemens Mobility S.L.U. from Mar 2025 to Jun 2025 with a stronger front-end and UI focus."
     },
     {
         "id": "education-1",
         "section": "education",
+        "type": "current_study",
         "title": "Higher Technician in Data and Process Analysis",
         "subtitle": "German Chamber of Commerce for Spain (AHK Spanien)",
         "date_range": "Sep 2025 - May 2026",
+        "current": true,
         "skills": [
             "English",
             "Data Analysis",
             "Big Data",
             "Process Optimization"
         ],
-        "content": "Alba Mora de la Sen is studying a Higher Technician in Data and Process Analysis at the German Chamber of Commerce for Spain (AHK Spanien) from Sep 2025 to May 2026. She is enrolled in the BigData+ program, a specialization training delivered under the German dual education system. Her studies focus on data analysis, process optimization, and information processing, with a practical orientation toward real business environments."
+        "summary": {
+            "es": "Alba está estudiando actualmente un Higher Technician in Data and Process Analysis en la German Chamber of Commerce for Spain (AHK Spanien).",
+            "en": "Alba is currently studying a Higher Technician in Data and Process Analysis at the German Chamber of Commerce for Spain (AHK Spanien)."
+        },
+        "highlights": {
+            "es": [
+                "Forma parte del programa BigData+.",
+                "Se centra en análisis de datos y optimización de procesos."
+            ],
+            "en": [
+                "She is enrolled in the BigData+ program.",
+                "It focuses on data analysis and process optimization."
+            ]
+        },
+        "keywords": [
+            "current studies",
+            "what is alba studying",
+            "estudios actuales",
+            "qué está estudiando alba",
+            "data and process analysis",
+            "bigdata+"
+        ],
+        "content": "Alba Mora de la Sen is studying a Higher Technician in Data and Process Analysis at AHK Spanien from Sep 2025 to May 2026."
     },
     {
         "id": "education-2",
         "section": "education",
+        "type": "education_record",
         "title": "Higher Technician in Web and Multimedia Management",
         "subtitle": "IES Virgen de la Paz",
         "date_range": "Sep 2023 - Jun 2025",
+        "current": false,
         "skills": [
             "HTML",
             "CSS",
@@ -67,25 +219,68 @@
             "XML",
             "English"
         ],
-        "content": "Alba Mora de la Sen completed a Higher Technician in Web and Multimedia Management at IES Virgen de la Paz from Sep 2023 to Jun 2025. This training focused on web development and digital content management, including the development and maintenance of websites, multimedia applications, and digital projects using standard web technologies and development best practices."
+        "summary": {
+            "es": "Alba completó un Higher Technician in Web and Multimedia Management en IES Virgen de la Paz, centrado en desarrollo web y contenidos digitales.",
+            "en": "Alba completed a Higher Technician in Web and Multimedia Management at IES Virgen de la Paz, focused on web development and digital content."
+        },
+        "highlights": {
+            "es": [
+                "Trabajó con HTML, CSS y JavaScript.",
+                "Desarrolló y mantuvo sitios web y proyectos digitales."
+            ],
+            "en": [
+                "She worked with HTML, CSS, and JavaScript.",
+                "She developed websites and digital projects."
+            ]
+        },
+        "keywords": [
+            "web education",
+            "formación web",
+            "desarrollo web",
+            "multimedia"
+        ],
+        "content": "Alba Mora de la Sen completed a Higher Technician in Web and Multimedia Management at IES Virgen de la Paz from Sep 2023 to Jun 2025."
     },
     {
         "id": "education-3",
         "section": "education",
+        "type": "education_record",
         "title": "Higher Technician in Business Administration and Finance",
         "subtitle": "European University",
         "date_range": "2018 - 2020",
+        "current": false,
         "skills": [
             "Microsoft Access",
-            "English",
             "Administration",
             "Finance"
         ],
-        "content": "Alba Mora de la Sen completed a Higher Technician in Business Administration and Finance at European University from 2018 to 2020. Her training covered administrative management, accounting, and corporate finance. She also participated in extracurricular activities such as the Communication Club and developed a strong foundation in business organization and resource management."
+        "summary": {
+            "es": "Alba completó un Higher Technician in Business Administration and Finance en European University, con base en administración y finanzas.",
+            "en": "Alba completed a Higher Technician in Business Administration and Finance at European University, building a foundation in administration and finance."
+        },
+        "highlights": {
+            "es": [
+                "Cubrió gestión administrativa, contabilidad y finanzas.",
+                "Participó en actividades como el Communication Club."
+            ],
+            "en": [
+                "It covered administrative management, accounting, and finance.",
+                "She also joined activities such as the Communication Club."
+            ]
+        },
+        "keywords": [
+            "business education",
+            "finance education",
+            "administración",
+            "finanzas",
+            "formación en empresa"
+        ],
+        "content": "Alba Mora de la Sen completed a Higher Technician in Business Administration and Finance at European University from 2018 to 2020."
     },
     {
         "id": "certification-1",
         "section": "certifications",
+        "type": "in_progress_certification",
         "title": "AWS Certified Data Engineer – Associate",
         "subtitle": "Amazon Web Services",
         "date_range": "In progress",
@@ -98,13 +293,38 @@
             "Data governance",
             "Event-driven architectures"
         ],
-        "content": "Alba Mora de la Sen is currently preparing the AWS Certified Data Engineer – Associate certification, code DEA-C01, issued by Amazon Web Services. This certification is focused on data pipelines, AWS Glue, Amazon Redshift, S3 data lakes, ETL processes, data governance, and event-driven architectures.",
+        "summary": {
+            "es": "Alba está preparando actualmente la certificación AWS Certified Data Engineer – Associate (DEA-C01).",
+            "en": "Alba is currently preparing the AWS Certified Data Engineer – Associate certification (DEA-C01)."
+        },
+        "highlights": {
+            "es": [
+                "Se centra en data pipelines y ETL.",
+                "Incluye Glue, Redshift y data lakes en S3."
+            ],
+            "en": [
+                "It focuses on data pipelines and ETL.",
+                "It includes Glue, Redshift, and S3 data lakes."
+            ]
+        },
+        "keywords": [
+            "aws certification",
+            "data engineer associate",
+            "dea-c01",
+            "certificación aws",
+            "certificación en progreso",
+            "in progress certification"
+        ],
+        "content": "Alba Mora de la Sen is currently preparing the AWS Certified Data Engineer – Associate certification, code DEA-C01.",
         "status": "in_progress",
+        "in_progress": true,
+        "completed": false,
         "code": "DEA-C01"
     },
     {
         "id": "certification-2",
         "section": "certifications",
+        "type": "completed_certification",
         "title": "AWS Certified Cloud Practitioner",
         "subtitle": "Amazon Web Services",
         "date_range": "Completed",
@@ -116,13 +336,37 @@
             "Well-Architected Framework",
             "Shared Responsibility Model"
         ],
-        "content": "Alba Mora de la Sen has completed the AWS Certified Cloud Practitioner certification, code CLF-C02, issued by Amazon Web Services. This certification covers cloud fundamentals, IAM, S3 and EC2 basics, pricing and billing, the AWS Well-Architected Framework, and the Shared Responsibility Model.",
+        "summary": {
+            "es": "Alba ya ha completado la certificación AWS Certified Cloud Practitioner (CLF-C02).",
+            "en": "Alba has already completed the AWS Certified Cloud Practitioner certification (CLF-C02)."
+        },
+        "highlights": {
+            "es": [
+                "Cubre fundamentos cloud e IAM.",
+                "Incluye S3, EC2, pricing y billing."
+            ],
+            "en": [
+                "It covers cloud fundamentals and IAM.",
+                "It includes S3, EC2, pricing, and billing."
+            ]
+        },
+        "keywords": [
+            "aws certification",
+            "cloud practitioner",
+            "clf-c02",
+            "certificación completada",
+            "completed certification"
+        ],
+        "content": "Alba Mora de la Sen has completed the AWS Certified Cloud Practitioner certification, code CLF-C02.",
         "status": "completed",
+        "completed": true,
+        "in_progress": false,
         "code": "CLF-C02"
     },
     {
         "id": "project-1",
         "section": "projects",
+        "type": "project",
         "title": "Personal Portfolio Website",
         "subtitle": "Web Development / React / Tailwind CSS / UI/UX",
         "date_range": "",
@@ -133,7 +377,29 @@
             "Vite",
             "React Router"
         ],
-        "content": "Alba Mora de la Sen built a Personal Portfolio Website, a responsive portfolio website created with React and Tailwind CSS. It features animated sections, interactive UI components, and a clean tech aesthetic. The project is related to web development, React, Tailwind CSS, and UI/UX.",
+        "summary": {
+            "es": "Portfolio responsive desarrollado con React, TypeScript y Tailwind CSS para presentar el perfil, la experiencia y los proyectos de Alba.",
+            "en": "Responsive portfolio website built with React, TypeScript, and Tailwind CSS to present Alba's profile, experience, and projects."
+        },
+        "highlights": {
+            "es": [
+                "Incluye secciones animadas y componentes interactivos.",
+                "Tiene un enfoque claro en UI/UX."
+            ],
+            "en": [
+                "It includes animated sections and interactive components.",
+                "It has a clear UI/UX focus."
+            ]
+        },
+        "keywords": [
+            "portfolio project",
+            "react portfolio",
+            "sitio web portfolio",
+            "react",
+            "tailwind",
+            "ui/ux"
+        ],
+        "content": "Alba Mora de la Sen built a Personal Portfolio Website, a responsive portfolio website created with React and Tailwind CSS.",
         "tags": [
             "Web Development",
             "React",
@@ -146,6 +412,7 @@
     {
         "id": "project-2",
         "section": "projects",
+        "type": "project",
         "title": "AWS Quiz Tracker",
         "subtitle": "Web Development / AWS / Quiz / React",
         "date_range": "",
@@ -156,7 +423,29 @@
             "Vite",
             "LocalStorage"
         ],
-        "content": "Alba Mora de la Sen built AWS Quiz Tracker, a web application to practice AWS certification questions with exam and study modes, category filters, progress statistics, and local persistence. The project is related to web development, AWS, quizzes, and React.",
+        "summary": {
+            "es": "Aplicación web para practicar preguntas de certificación AWS con modos de examen y estudio, filtros y seguimiento de progreso.",
+            "en": "Web app for practicing AWS certification questions with exam and study modes, filters, and progress tracking."
+        },
+        "highlights": {
+            "es": [
+                "Incluye estadísticas de progreso y persistencia local.",
+                "Está orientada a la preparación de certificaciones AWS."
+            ],
+            "en": [
+                "It includes progress statistics and local persistence.",
+                "It is aimed at AWS certification preparation."
+            ]
+        },
+        "keywords": [
+            "aws project",
+            "quiz app",
+            "certification practice",
+            "proyecto aws",
+            "aplicación de cuestionarios",
+            "preparación aws"
+        ],
+        "content": "Alba Mora de la Sen built AWS Quiz Tracker, a web application to practice AWS certification questions.",
         "tags": [
             "Web Development",
             "AWS",
@@ -169,18 +458,42 @@
     {
         "id": "project-3",
         "section": "projects",
+        "type": "project",
         "title": "TurnoMaster",
         "subtitle": "Fullstack / Backend / Web App / Docker",
         "date_range": "",
         "skills": [
-            "SpringBoot",
+            "Spring Boot",
             "Java",
             "Angular",
             "TypeScript",
             "MySQL",
             "Docker"
         ],
-        "content": "Alba Mora de la Sen built TurnoMaster, a shift management web application with role-based access for admin and employee users, scheduling features, and deployment using Docker. The backend and frontend are separated. The project is related to fullstack development, backend engineering, web applications, and Docker.",
+        "summary": {
+            "es": "Aplicación fullstack de gestión de turnos con acceso por roles, backend y frontend separados, y despliegue con Docker.",
+            "en": "Fullstack shift-management application with role-based access, separate backend and frontend, and Docker deployment."
+        },
+        "highlights": {
+            "es": [
+                "Combina Java con Spring Boot, Angular y MySQL.",
+                "Se desplegó usando Docker."
+            ],
+            "en": [
+                "It combines Java with Spring Boot, Angular, and MySQL.",
+                "It was deployed using Docker."
+            ]
+        },
+        "keywords": [
+            "docker project",
+            "fullstack project",
+            "shift management",
+            "proyecto docker",
+            "gestión de turnos",
+            "angular",
+            "spring boot"
+        ],
+        "content": "Alba Mora de la Sen built TurnoMaster, a shift management web application with role-based access and deployment using Docker.",
         "tags": [
             "Fullstack",
             "Backend",
@@ -193,6 +506,7 @@
     {
         "id": "project-4",
         "section": "projects",
+        "type": "project",
         "title": "AI Knowledge Assistant",
         "subtitle": "AI / RAG / Backend / API",
         "date_range": "",
@@ -204,7 +518,31 @@
             "OpenAI",
             "Docker"
         ],
-        "content": "Alba Mora de la Sen built AI Knowledge Assistant, an AI assistant that answers questions from user documents using RAG with embeddings and vector search. It includes sources and chat history. The project is related to artificial intelligence, retrieval-augmented generation, backend development, and API design.",
+        "summary": {
+            "es": "Asistente de IA que responde preguntas sobre documentos del usuario mediante RAG, embeddings, historial de chat y trazabilidad de fuentes.",
+            "en": "AI assistant that answers questions about user documents using RAG, embeddings, chat history, and source traceability."
+        },
+        "highlights": {
+            "es": [
+                "Está construido con Python y FastAPI.",
+                "Usa LangChain, embeddings y búsqueda vectorial."
+            ],
+            "en": [
+                "It is built with Python and FastAPI.",
+                "It uses LangChain, embeddings, and vector search."
+            ]
+        },
+        "keywords": [
+            "langchain project",
+            "rag project",
+            "ai assistant",
+            "proyecto langchain",
+            "proyecto rag",
+            "asistente de ia",
+            "fastapi",
+            "embeddings"
+        ],
+        "content": "Alba Mora de la Sen built AI Knowledge Assistant, an AI assistant that answers questions from user documents using RAG with embeddings and vector search.",
         "tags": [
             "AI",
             "RAG",
@@ -217,6 +555,7 @@
     {
         "id": "project-5",
         "section": "projects",
+        "type": "project",
         "title": "AWS Notes (MkDocs)",
         "subtitle": "Documentation / AWS / Static Site",
         "date_range": "",
@@ -225,7 +564,29 @@
             "Material for MkDocs",
             "GitHub Pages"
         ],
-        "content": "Alba Mora de la Sen built AWS Notes, a documentation site for AWS Cloud Practitioner modules with structured notes, diagrams, and deployment via GitHub Pages. The project is related to documentation, AWS, and static site generation.",
+        "summary": {
+            "es": "Sitio de documentación con apuntes estructurados de AWS Cloud Practitioner y despliegue estático.",
+            "en": "Documentation site with structured AWS Cloud Practitioner notes and static deployment."
+        },
+        "highlights": {
+            "es": [
+                "Usa MkDocs y Material for MkDocs.",
+                "Se publica con GitHub Pages."
+            ],
+            "en": [
+                "It uses MkDocs and Material for MkDocs.",
+                "It is published with GitHub Pages."
+            ]
+        },
+        "keywords": [
+            "aws project",
+            "documentation project",
+            "mkdocs",
+            "proyecto aws",
+            "documentación",
+            "sitio estático"
+        ],
+        "content": "Alba Mora de la Sen built AWS Notes, a documentation site for AWS Cloud Practitioner modules with structured notes.",
         "tags": [
             "Documentation",
             "AWS",
@@ -237,6 +598,7 @@
     {
         "id": "project-6",
         "section": "projects",
+        "type": "project",
         "title": "WaterTrack Microservices Demo",
         "subtitle": "DevOps / Docker / Backend / API",
         "date_range": "",
@@ -246,7 +608,30 @@
             "REST",
             "PostgreSQL"
         ],
-        "content": "Alba Mora de la Sen built WaterTrack Microservices Demo, a microservices demonstration focused on clean architecture and containerized deployment. It shows service communication and basic observability concepts. The project is related to DevOps, Docker, backend engineering, and APIs.",
+        "summary": {
+            "es": "Demo de microservicios orientada a arquitectura limpia, comunicación entre servicios y despliegue contenerizado.",
+            "en": "Microservices demo focused on clean architecture, service communication, and containerized deployment."
+        },
+        "highlights": {
+            "es": [
+                "Usa Docker Compose y PostgreSQL.",
+                "Se centra en conceptos de backend y APIs."
+            ],
+            "en": [
+                "It uses Docker Compose and PostgreSQL.",
+                "It focuses on backend and API concepts."
+            ]
+        },
+        "keywords": [
+            "docker project",
+            "microservices project",
+            "backend api",
+            "proyecto docker",
+            "microservicios",
+            "postgresql",
+            "api"
+        ],
+        "content": "Alba Mora de la Sen built WaterTrack Microservices Demo, a microservices demonstration focused on clean architecture and containerized deployment.",
         "tags": [
             "DevOps",
             "Docker",
@@ -259,6 +644,7 @@
     {
         "id": "project-7",
         "section": "projects",
+        "type": "project",
         "title": "Pomodoro Pokémon",
         "subtitle": "Cloud / AWS / Microservices",
         "date_range": "",
@@ -269,7 +655,31 @@
             "Lambda",
             "DynamoDB"
         ],
-        "content": "Alba Mora de la Sen built Pomodoro Pokémon, a playful productivity app concept using Pokémon-themed rewards, designed as a cloud-native microservices lab on AWS. The project is related to cloud computing, AWS, and microservices.",
+        "summary": {
+            "es": "Concepto de app de productividad con recompensas estilo Pokémon, planteado como laboratorio cloud-native de microservicios en AWS.",
+            "en": "Productivity app concept with Pokémon-style rewards, designed as a cloud-native microservices lab on AWS."
+        },
+        "highlights": {
+            "es": [
+                "Está relacionado con servicios cloud de AWS.",
+                "Incluye ECS, API Gateway, Lambda y DynamoDB."
+            ],
+            "en": [
+                "It is related to AWS cloud services.",
+                "It includes ECS, API Gateway, Lambda, and DynamoDB."
+            ]
+        },
+        "keywords": [
+            "aws project",
+            "cloud-native",
+            "microservices",
+            "proyecto aws",
+            "arquitectura cloud-native",
+            "ecs",
+            "lambda",
+            "dynamodb"
+        ],
+        "content": "Alba Mora de la Sen built Pomodoro Pokémon, a playful productivity app concept designed as a cloud-native microservices lab on AWS.",
         "tags": [
             "Cloud",
             "AWS",
@@ -281,6 +691,7 @@
     {
         "id": "project-8",
         "section": "projects",
+        "type": "project",
         "title": "Smart Search for Websites",
         "subtitle": "AI / Search / Web Development",
         "date_range": "",
@@ -290,7 +701,30 @@
             "Embeddings",
             "Vector Search"
         ],
-        "content": "Alba Mora de la Sen built Smart Search for Websites, an experimental search bar that understands a website by reading its structure and content in order to improve discoverability and user experience. The project is related to artificial intelligence, search, and web development.",
+        "summary": {
+            "es": "Buscador experimental que entiende la estructura y el contenido de una web para mejorar la descubribilidad y la experiencia de usuario.",
+            "en": "Experimental search experience that understands a website's structure and content to improve discoverability and user experience."
+        },
+        "highlights": {
+            "es": [
+                "Combina scraping y comprensión del contenido web.",
+                "Está relacionado con embeddings y búsqueda semántica."
+            ],
+            "en": [
+                "It combines scraping and understanding of website content.",
+                "It is related to embeddings and semantic search."
+            ]
+        },
+        "keywords": [
+            "search project",
+            "embeddings project",
+            "semantic search",
+            "proyecto de búsqueda",
+            "búsqueda semántica",
+            "web search",
+            "ai project"
+        ],
+        "content": "Alba Mora de la Sen built Smart Search for Websites, an experimental search bar that understands a website to improve discoverability and user experience.",
         "tags": [
             "AI",
             "Search",
@@ -302,6 +736,7 @@
     {
         "id": "stack-summary-1",
         "section": "stack",
+        "type": "stack_summary",
         "title": "Main technology stack",
         "subtitle": "Languages, frameworks, databases, AI, cloud, and tools",
         "date_range": "",
@@ -345,11 +780,33 @@
             "Figma",
             "Obsidian"
         ],
-        "content": "Alba Mora de la Sen works with a broad technical stack across frontend, backend, artificial intelligence, data science, cloud, databases, and software tools. Her languages include JavaScript, TypeScript, Java, and Python. She uses frameworks and technologies such as ReactJS, Tailwind CSS, Angular, Next.js, Spring Boot, Django, Flask, and Streamlit. She works with databases such as PostgreSQL, MySQL, and MongoDB, and tools such as DBeaver. In artificial intelligence and data science, she uses LangChain, Hugging Face, Pandas, NumPy, Matplotlib, Jupyter, and Scikit-Learn. In cloud and DevOps, she works with AWS, Docker, Kubernetes, Rancher UI, GitLab CI/CD, npm, and kubectl. Her software and productivity tools include Git, GitHub, GitLab, VS Code, Jira, Notion, Figma, and Obsidian."
+        "summary": {
+            "es": "El stack de Alba cubre frontend, backend, inteligencia artificial, datos, cloud, bases de datos y herramientas de desarrollo.",
+            "en": "Alba's stack spans frontend, backend, artificial intelligence, data, cloud, databases, and development tools."
+        },
+        "highlights": {
+            "es": [
+                "Entre sus tecnologías principales están Python, React, Angular, JavaScript, TypeScript, PostgreSQL, Docker, LangChain, AWS y Kubernetes."
+            ],
+            "en": [
+                "Her main technologies include Python, React, Angular, JavaScript, TypeScript, PostgreSQL, Docker, LangChain, AWS, and Kubernetes."
+            ]
+        },
+        "keywords": [
+            "stack summary",
+            "main stack",
+            "tech stack",
+            "resumen del stack",
+            "stack principal",
+            "tecnologías principales",
+            "skills"
+        ],
+        "content": "Alba Mora de la Sen works with a broad technical stack across frontend, backend, artificial intelligence, data science, cloud, databases, and software tools."
     },
     {
         "id": "stack-frontend-1",
         "section": "stack",
+        "type": "stack_category",
         "title": "Frontend technologies",
         "subtitle": "Frontend specialization",
         "date_range": "",
@@ -361,11 +818,30 @@
             "Angular",
             "Next.js"
         ],
+        "summary": {
+            "es": "En frontend, Alba trabaja con JavaScript, TypeScript, ReactJS, Tailwind CSS, Angular y Next.js.",
+            "en": "On the frontend side, Alba works with JavaScript, TypeScript, ReactJS, Tailwind CSS, Angular, and Next.js."
+        },
+        "highlights": {
+            "es": [
+                "React y Angular forman parte de su stack."
+            ],
+            "en": [
+                "React and Angular are part of her stack."
+            ]
+        },
+        "keywords": [
+            "frontend technologies",
+            "frontend stack",
+            "tecnologías frontend",
+            "stack frontend"
+        ],
         "content": "Alba Mora de la Sen has frontend experience with JavaScript, TypeScript, ReactJS, Tailwind CSS, Angular, and Next.js."
     },
     {
         "id": "stack-backend-1",
         "section": "stack",
+        "type": "stack_category",
         "title": "Backend technologies",
         "subtitle": "Backend specialization",
         "date_range": "",
@@ -377,11 +853,30 @@
             "Flask",
             "Streamlit"
         ],
+        "summary": {
+            "es": "En backend, Alba trabaja con Java, Python, Spring Boot, Django, Flask y Streamlit.",
+            "en": "On the backend side, Alba works with Java, Python, Spring Boot, Django, Flask, and Streamlit."
+        },
+        "highlights": {
+            "es": [
+                "Python es una de sus tecnologías principales."
+            ],
+            "en": [
+                "Python is one of her main technologies."
+            ]
+        },
+        "keywords": [
+            "backend technologies",
+            "backend stack",
+            "tecnologías backend",
+            "stack backend"
+        ],
         "content": "Alba Mora de la Sen has backend experience with Java, Python, Spring Boot, Django, Flask, and Streamlit."
     },
     {
         "id": "stack-ai-1",
         "section": "stack",
+        "type": "stack_category",
         "title": "AI and data technologies",
         "subtitle": "Artificial Intelligence and Data Science",
         "date_range": "",
@@ -395,11 +890,31 @@
             "Scikit-Learn",
             "Python"
         ],
+        "summary": {
+            "es": "En IA y datos, Alba trabaja con Python, LangChain, Hugging Face, Pandas, NumPy, Matplotlib, Jupyter y Scikit-Learn.",
+            "en": "For AI and data work, Alba uses Python, LangChain, Hugging Face, Pandas, NumPy, Matplotlib, Jupyter, and Scikit-Learn."
+        },
+        "highlights": {
+            "es": [
+                "LangChain forma parte de su stack aplicado a asistentes y RAG."
+            ],
+            "en": [
+                "LangChain is part of her stack for assistants and RAG-related work."
+            ]
+        },
+        "keywords": [
+            "ai technologies",
+            "data technologies",
+            "ia y datos",
+            "herramientas de ia",
+            "herramientas de datos"
+        ],
         "content": "Alba Mora de la Sen works with artificial intelligence and data science technologies including Python, LangChain, Hugging Face, Pandas, NumPy, Matplotlib, Jupyter, and Scikit-Learn."
     },
     {
         "id": "stack-cloud-1",
         "section": "stack",
+        "type": "stack_category",
         "title": "Cloud and DevOps technologies",
         "subtitle": "Cloud & DevOps",
         "date_range": "",
@@ -412,11 +927,33 @@
             "npm",
             "kubectl"
         ],
+        "summary": {
+            "es": "En cloud y DevOps, Alba trabaja con AWS, Docker, Kubernetes, Rancher UI, GitLab CI/CD, npm y kubectl.",
+            "en": "For cloud and DevOps work, Alba uses AWS, Docker, Kubernetes, Rancher UI, GitLab CI/CD, npm, and kubectl."
+        },
+        "highlights": {
+            "es": [
+                "AWS, Docker y Kubernetes son tecnologías clave."
+            ],
+            "en": [
+                "AWS, Docker, and Kubernetes are key technologies."
+            ]
+        },
+        "keywords": [
+            "cloud technologies",
+            "devops tools",
+            "tecnologías cloud",
+            "herramientas devops",
+            "aws",
+            "docker",
+            "kubernetes"
+        ],
         "content": "Alba Mora de la Sen works with cloud and DevOps technologies including AWS, Docker, Kubernetes, Rancher UI, GitLab CI/CD, npm, and kubectl."
     },
     {
         "id": "stack-databases-1",
         "section": "stack",
+        "type": "stack_category",
         "title": "Database technologies",
         "subtitle": "Databases",
         "date_range": "",
@@ -426,11 +963,30 @@
             "MongoDB",
             "DBeaver"
         ],
+        "summary": {
+            "es": "En bases de datos, Alba trabaja con PostgreSQL, MySQL, MongoDB y DBeaver.",
+            "en": "For databases, Alba works with PostgreSQL, MySQL, MongoDB, and DBeaver."
+        },
+        "highlights": {
+            "es": [
+                "PostgreSQL forma parte de su stack principal."
+            ],
+            "en": [
+                "PostgreSQL is part of her core stack."
+            ]
+        },
+        "keywords": [
+            "database technologies",
+            "databases",
+            "tecnologías de bases de datos",
+            "bases de datos"
+        ],
         "content": "Alba Mora de la Sen works with database technologies including PostgreSQL, MySQL, MongoDB, and DBeaver."
     },
     {
         "id": "stack-tools-1",
         "section": "stack",
+        "type": "stack_category",
         "title": "Software and productivity tools",
         "subtitle": "Software & Tools",
         "date_range": "",
@@ -444,15 +1000,69 @@
             "Figma",
             "Obsidian"
         ],
+        "summary": {
+            "es": "Alba utiliza herramientas de software y productividad como Git, GitHub, GitLab, VS Code, Jira, Notion, Figma y Obsidian.",
+            "en": "Alba uses software and productivity tools such as Git, GitHub, GitLab, VS Code, Jira, Notion, Figma, and Obsidian."
+        },
+        "highlights": {
+            "es": [
+                "Incluye herramientas de colaboración, diseño y documentación."
+            ],
+            "en": [
+                "It includes collaboration, design, and documentation tools."
+            ]
+        },
+        "keywords": [
+            "software tools",
+            "productivity tools",
+            "herramientas de software",
+            "herramientas de productividad"
+        ],
         "content": "Alba Mora de la Sen uses software and productivity tools including Git, GitHub, GitLab, VS Code, Jira, Notion, Figma, and Obsidian."
     },
     {
         "id": "contact-1",
         "section": "contact",
+        "type": "contact",
         "title": "Contact information",
-        "subtitle": "GitHub and LinkedIn",
+        "subtitle": "Portfolio, email, GitHub, and LinkedIn",
         "date_range": "",
         "skills": [],
-        "content": "Alba Mora de la Sen can be contacted through her portfolio contact section. Her public links include GitHub at https://github.com/albamdls and LinkedIn at https://www.linkedin.com/in/alba-mora-de-la-sen/."
+        "summary": {
+            "es": "Se puede contactar con Alba a través de su portfolio, email, GitHub y LinkedIn.",
+            "en": "Alba can be contacted through her portfolio, email, GitHub, and LinkedIn."
+        },
+        "highlights": {
+            "es": [
+                "Portfolio: https://albamora.dev",
+                "Email: albamora.dev@gmail.com",
+                "GitHub: https://github.com/albamdls",
+                "LinkedIn: https://www.linkedin.com/in/alba-mora-de-la-sen/"
+            ],
+            "en": [
+                "Portfolio: https://albamora.dev",
+                "Email: albamora.dev@gmail.com",
+                "GitHub: https://github.com/albamdls",
+                "LinkedIn: https://www.linkedin.com/in/alba-mora-de-la-sen/"
+            ]
+        },
+        "keywords": [
+            "contact",
+            "contact information",
+            "portfolio links",
+            "contacto",
+            "información de contacto",
+            "enlaces públicos",
+            "email",
+            "correo",
+            "albamora.dev@gmail.com"
+        ],
+        "content": "Alba Mora de la Sen can be contacted through her portfolio, by email at albamora.dev@gmail.com, on GitHub at https://github.com/albamdls, and on LinkedIn at https://www.linkedin.com/in/alba-mora-de-la-sen/.",
+        "links": {
+            "portfolio": "https://albamora.dev",
+            "email": "mailto:albamora.dev@gmail.com",
+            "github": "https://github.com/albamdls",
+            "linkedin": "https://www.linkedin.com/in/alba-mora-de-la-sen/"
+        }
     }
 ]
