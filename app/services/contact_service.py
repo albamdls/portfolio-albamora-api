@@ -1,9 +1,8 @@
-import json
 import logging
 import re
 from html import escape
-from urllib import error, request
 
+import resend
 from fastapi import HTTPException
 
 from app.core.config import CONTACT_FROM_EMAIL, CONTACT_TO_EMAIL, RESEND_API_KEY
@@ -11,7 +10,6 @@ from app.schemas.contact import ContactRequest, ContactResponse
 
 logger = logging.getLogger(__name__)
 
-RESEND_API_URL = "https://api.resend.com/emails"
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
@@ -30,7 +28,7 @@ def _validate_payload(payload: dict[str, str]) -> None:
         raise HTTPException(status_code=400, detail="Please provide a valid email address.")
 
 
-def _build_email_body(payload: dict[str, str]) -> dict:
+def _build_email_params(payload: dict[str, str]) -> resend.Emails.SendParams:
     safe_name = escape(payload["name"])
     safe_email = escape(payload["email"])
     safe_message = escape(payload["message"]).replace("\n", "<br />")
@@ -57,49 +55,28 @@ def _build_email_body(payload: dict[str, str]) -> dict:
     }
 
 
-def _send_resend_email(body: dict) -> None:
+def send_contact_message(payload: ContactRequest) -> ContactResponse:
     if not RESEND_API_KEY:
         raise HTTPException(
             status_code=503,
             detail="Contact service is not configured yet. Please try again later.",
         )
 
-    req = request.Request(
-        RESEND_API_URL,
-        data=json.dumps(body).encode("utf-8"),
-        headers={
-            "Authorization": f"Bearer {RESEND_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        method="POST",
-    )
-
-    try:
-        with request.urlopen(req, timeout=15) as response:
-            if response.status not in {200, 201, 202}:
-                raise HTTPException(
-                    status_code=502,
-                    detail="The email provider returned an unexpected response.",
-                )
-    except error.HTTPError as exc:
-        detail = "There was a problem sending your message."
-        try:
-            raw = exc.read().decode("utf-8")
-            logger.error("Resend error %s: %s", exc.code, raw)
-            payload = json.loads(raw)
-            detail = payload.get("message") or payload.get("error", {}).get("message") or detail
-        except Exception:
-            pass
-        raise HTTPException(status_code=502, detail=detail) from exc
-    except error.URLError as exc:
-        raise HTTPException(
-            status_code=502,
-            detail="The contact service is temporarily unavailable. Please try again later.",
-        ) from exc
-
-
-def send_contact_message(payload: ContactRequest) -> ContactResponse:
     normalized = _normalize_payload(payload)
     _validate_payload(normalized)
-    _send_resend_email(_build_email_body(normalized))
+
+    resend.api_key = RESEND_API_KEY
+
+    try:
+        resend.Emails.send(_build_email_params(normalized))
+    except resend.exceptions.ResendError as exc:
+        logger.error("Resend error: %s", exc)
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.error("Unexpected error sending email: %s", exc)
+        raise HTTPException(
+            status_code=502,
+            detail="There was a problem sending your message. Please try again later.",
+        ) from exc
+
     return ContactResponse(success=True, message="Message sent successfully.")
