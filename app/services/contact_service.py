@@ -1,4 +1,5 @@
 import json
+import logging
 import re
 from html import escape
 from urllib import error, request
@@ -7,6 +8,8 @@ from fastapi import HTTPException
 
 from app.core.config import CONTACT_FROM_EMAIL, CONTACT_TO_EMAIL, RESEND_API_KEY
 from app.schemas.contact import ContactRequest, ContactResponse
+
+logger = logging.getLogger(__name__)
 
 RESEND_API_URL = "https://api.resend.com/emails"
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
@@ -81,7 +84,9 @@ def _send_resend_email(body: dict) -> None:
     except error.HTTPError as exc:
         detail = "There was a problem sending your message."
         try:
-            payload = json.loads(exc.read().decode("utf-8"))
+            raw = exc.read().decode("utf-8")
+            logger.error("Resend error %s: %s", exc.code, raw)
+            payload = json.loads(raw)
             detail = payload.get("message") or payload.get("error", {}).get("message") or detail
         except Exception:
             pass
